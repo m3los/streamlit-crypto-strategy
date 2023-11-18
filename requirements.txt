@@ -1,7 +1,7 @@
 pandas
 numpy
 ccxt
-streamlit
+streamlit>=1.28.0
 pandas_ta
 plotly
 pyarrow
