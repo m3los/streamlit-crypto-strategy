@@ -305,7 +305,7 @@ with st.form("select_form"):
         with col2:
             st.empty()
         with col3:
-            arun_chkbox = st.toggle("AUTORUN")
+            arun_chkbox = st.checkbox("AUTORUN")
             autorun_interval = st.number_input("INTERVAL", min_value=1, max_value=1440,
                                                help="Rerun every n minutes")
             autorun_limit = st.number_input("LIMIT", min_value=10, max_value=1000,
