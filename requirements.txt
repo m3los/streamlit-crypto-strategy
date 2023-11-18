@@ -1,0 +1,10 @@
+pandas
+numpy
+ccxt
+streamlit
+pandas_ta
+ta-lib
+plotly
+pyarrow
+discord-webhook
+streamlit_autorefresh
