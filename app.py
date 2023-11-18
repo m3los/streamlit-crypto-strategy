@@ -9,7 +9,6 @@ import pandas_ta as pta
 from datetime import datetime
 from time import perf_counter
 from functools import reduce
-import talib as ta
 
 st.set_page_config(layout="wide", page_title="Supply & Demand", page_icon="📊")
 import tradingview_charts as tv
@@ -107,11 +106,11 @@ def stop_autorun():
 
 def add_indicators(df) -> pd.DataFrame:
     df['hma55'] = pta.hma(df['close'], length=55)
-    df['ema20'] = ta.EMA(df['close'], timeperiod=20)
-    df['ema50'] = ta.EMA(df['close'], timeperiod=50)
-    df['ema100'] = ta.EMA(df['close'], timeperiod=100)
-    df['ema200'] = ta.EMA(df['close'], timeperiod=200)
-    df['sma200'] = ta.SMA(df['close'], timeperiod=200)
+    df['ema20'] = pta.ema(df['close'], length=20)
+    df['ema50'] = pta.ema(df['close'], length=50)
+    df['ema100'] = pta.ema(df['close'], length=100)
+    df['ema200'] = pta.ema(df['close'], length=200)
+    df['sma200'] = pta.sma(df['close'], length=200)
 
     df['trend'] = df.apply(trend, axis=1)
 
@@ -248,14 +247,14 @@ def update_data(last_data):
 
 
 # == SIDEBAR ==
-with st.form("run_form"):
+with st.form("sidebar_form"):
     with st.sidebar:
         st.title(":green[Data] settings ⚙")
         st.divider()
         exchange = st.selectbox("**EXCHANGE**",
                                 ["binance", "kucoin", "bitget", "okx"], 0)
         ohlcv_timeframes = st.multiselect("**TIMEFRAMES**", ["1m", "5m", "15m", "1h", "4h", "12h", "1d"],
-                                          default=["1h", "15m"], max_selections=2)
+                                          default=["1h", "15m"], max_selections=3)
         pair_limit = st.slider("**PAIR LIMIT**", min_value=0, max_value=100, value=5, step=1,
                                help="Pairs sorted by highest 24h$ volume")
         candle_limit = st.slider("**CANDLE LIMIT**", min_value=10, max_value=1000, value=1000, step=10,
@@ -299,7 +298,7 @@ with st.form("select_form"):
             plots = st.multiselect("**PLOT CHARTS**",
                                    ["StochRSI Map", "Adv StochRSI Map", "Performance Lines", "Acceleration",
                                     "Acceleration_2", "Order Blocks"],
-                                   max_selections=3)
+                                   max_selections=2)
             discord_notif = st.multiselect("**SEND DISCORD NOTIFICATION**",
                                            ["StochRSI", "Adv StochRSI", "Order Blocks", "test"])
             discord_url = st.text_input("**DISCORD URL**", st.session_state["discord_url"])
