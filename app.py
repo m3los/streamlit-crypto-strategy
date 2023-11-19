@@ -197,16 +197,18 @@ def merge_df(df1, df2):
     dataframe.reset_index(inplace=True)
     del dataframe['index']
 
-    # Enter long conditions
+    # long conditions
     long_c = []
     c1 = dataframe['low'] > dataframe['hma55_x']
     c2 = dataframe['close'] > dataframe['q_lower_band']
     long_c.extend([c1, c2])
 
+    dataframe['trade'] = ""
     dataframe.loc[
         reduce(lambda x, y: x & y, long_c),
         'trade'] = 'L'
 
+    # short conditions
     short_c = []
     c1 = dataframe['high'] < dataframe['hma55_x']
     short_c.extend([c1])
