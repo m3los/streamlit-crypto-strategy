@@ -245,7 +245,6 @@ def plot_adv_map(filtered_df, last_data):
     # Create stacked bar chart for each symbol, each bar segment has height of 1
     for sym in st.session_state['symbols']:
         sym_df = filtered_df[(filtered_df['symbol'] == sym)]
-        st.write(sym_df)
         for j in range(len(sym_df)):
             bar_color = sym_df.iloc[j]['bar_color']
             dtime = sym_df.iloc[j]['datetime']
