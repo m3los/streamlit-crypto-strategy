@@ -275,7 +275,7 @@ with st.form("sidebar_form"):
 
 # == HEADER ==
 st.subheader("Crypto :orange[strategy] Dashboard ⬆⬇")
-st.write(f"Last data retrieved: {st.session_state['last_data']}, {exchange}")
+st.write(f"Last data retrieved: {st.session_state['last_data']}{', ' + exchange if st.session_state['last_data'] else ''}")
 
 # == INFO HEADER ==
 col1, col2 = st.columns(2)
